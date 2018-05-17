@@ -1,6 +1,12 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
+
+//import {removeNotification} from '../reducers/notificationReducer'
+
+
 
 class Notification extends React.Component {
+
   render() {
     const style = {
       border: 'solid',

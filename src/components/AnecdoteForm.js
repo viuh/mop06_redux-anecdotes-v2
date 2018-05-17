@@ -1,19 +1,18 @@
 import React from 'react'
 import { createNewAnecdote } from '../reducers/anecdoteReducer';
+import { showNewCreation } from '../reducers/notificationReducer';
 
 class AnecdoteForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const content = e.target.anecdote.value
-
+    console.log('Submittia?', content)
     this.props.store.dispatch(createNewAnecdote(content))
-    /*this.props.store.dispatch({ 
-      type: 'CREATE', 
-      content 
-    })*/
-  
+    this.props.store.dispatch(showNewCreation(content))
+     
     e.target.anecdote.value = ''
   }
+
    render() {
      return (
        <div>

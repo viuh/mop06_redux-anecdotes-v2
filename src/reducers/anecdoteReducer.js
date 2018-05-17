@@ -1,3 +1,6 @@
+import {showNewCreation, showNotification} from './notificationReducer'
+
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -31,7 +34,19 @@ export const voteAnecdote = (id) => {
   }
 }
 
+export const specificAnecdote = (store, idx) => {
 
+  let voted = store.find(a => a.id === idx)
+  let res = ''
+  try {
+    console.log('loytyi:', voted , '--', voted.content)
+    res = voted.content
+  } catch (exception) {
+    console.log('ERR')
+  }
+
+  return res
+}
 
 const initialState = anecdotesAtStart.map(asObject)
 
@@ -40,9 +55,20 @@ const reducer = (store = initialState, action) => {
     const old = store.filter(a => a.id !==action.id)
     const voted = store.find(a => a.id === action.id)
 
+    let nimi = specificAnecdote(store, action.id)
+
+    console.log('XXX ', action, ':', nimi)
+    showNotification(nimi)
+
+
     return [...old, { ...voted, votes: voted.votes+1 } ]
+
   }
   if (action.type === 'CREATE') {
+    let nimi2 = specificAnecdote(store, action.id)
+    console.log('YYY ', action, '--', action.id, ':nimi:', nimi2)
+
+    showNewCreation(nimi2)
 
     return [...store, { content: action.content, id: getId(), votes:0 }]
   }
