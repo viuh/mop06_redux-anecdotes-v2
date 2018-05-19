@@ -1,4 +1,6 @@
-import {showNewCreation, showNotification} from './notificationReducer'
+
+
+import { showNewCreation, showNotification } from './notificationReducer'
 
 
 const anecdotesAtStart = [
@@ -27,14 +29,15 @@ export const createNewAnecdote = (content) => {
   }
 }
 
-export const voteAnecdote = (id) => {
+export const voteAnecdote = (id,name) => {
   return {
     type: 'VOTE',
-    id: id
+    id: id,
+    name: name
   }
 }
 
-export const specificAnecdote = (store, idx) => {
+/*export const specificAnecdote = (store, idx) => {
 
   let voted = store.find(a => a.id === idx)
   let res = ''
@@ -46,7 +49,7 @@ export const specificAnecdote = (store, idx) => {
   }
 
   return res
-}
+}*/
 
 const initialState = anecdotesAtStart.map(asObject)
 
@@ -55,18 +58,14 @@ const reducer = (store = initialState, action) => {
     const old = store.filter(a => a.id !==action.id)
     const voted = store.find(a => a.id === action.id)
 
-    let nimi = specificAnecdote(store, action.id)
-
-    console.log('XXX ', action, ':', nimi)
-    showNotification(nimi)
-
+    showNotification(action.name)
 
     return [...old, { ...voted, votes: voted.votes+1 } ]
 
   }
   if (action.type === 'CREATE') {
-    let nimi2 = specificAnecdote(store, action.id)
-    console.log('YYY ', action, '--', action.id, ':nimi:', nimi2)
+    let nimi2 =action.name 
+    //console.log('YYY ', action, '--', action.id, ':nimi:', nimi2)
 
     showNewCreation(nimi2)
 

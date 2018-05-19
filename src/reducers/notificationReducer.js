@@ -1,4 +1,3 @@
-import React from 'react'
 
 
 const notificationsAtStart = {
@@ -6,9 +5,9 @@ const notificationsAtStart = {
   text: 'states initialized'
 }
 
-const notificationReducer = (state='', action) => {
+/*const notificationReducer = (state='', action) => {
 
-  console.log('NoRe:', action)
+  //console.log('NoRe:', action)
 
   switch (action.type) {
   case 'SHOWVOTE':
@@ -18,40 +17,42 @@ const notificationReducer = (state='', action) => {
   default:
     return state
   }
-}
-
-//meta: { delay: N }
+}*/
 
 export const showNotification = (atext) => {
-  console.log('sn: param >', atext, '<')
-  let msg = 'xVoted for '+ atext
+
+  let msg = 'Voted for: '+ atext
   let newstate = ''
 
-  newstate= { text: msg, meta: { delay:5000 } , type: 'SHOWVOTE' }
+  newstate = {
+    meta: { delay: 5000 },
+    type: 'SHOWVOTE',
+    text: msg
+  }
+
+
   return newstate
 }
 
 export const showNewCreation = (text) => {
 
-  console.log('uusi kehiin?',text)
+  //console.log('uusi kehiin?',text)
   let newstate = { text: ' ' }
 
   if (text !== undefined ) {
     newstate = {
       meta: { delay: 5000 },
       type: 'SHOWNEW',
-      text: 'New created:'+ text
+      text: 'New anecdote created: '+ text
     }
   } else {
 
   }
 
-
-
   //let store = newstate
   return newstate
-
 }
+
 
 export const removeNotification = () => {
   return {
@@ -62,27 +63,22 @@ export const removeNotification = () => {
 }
 
 
-
-
 const initialState = notificationsAtStart
 
 const reducer = (store = initialState, action) => {
 
-  console.log('NotifRed nyt:', store , ' actioni:' , action.text, '-- a---', action.type)
+  //console.log('NotifRed nyt:', store , ' actioni:' , action.text, '-- a---', action.type)
 
   if (action.type === 'SHOWNEW' || action.type === 'CREATE') {
     let ek =  showNewCreation(action.content)
     removeNotification()
     return ek
-    //return { text: 'xxCreated new: '+action.text, meta: { delay:5000 } }
   }
 
   if (action.type === 'SHOWVOTE' || action.type === 'VOTE') {
-    let uus = showNotification(action.content)
-    console.log('ja poistan ilmoa')
-    removeNotification()
-    return uus
-    //return { text: 'xVoted for: '+action.text, meta: { delay:5000 } }
+
+    let ek2 = showNotification(action.name)
+    store = ek2 
   }
 
 

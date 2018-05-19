@@ -16,7 +16,7 @@ const reducer = combineReducers({
  * From: https://redux.js.org/advanced/middleware
  */
 const timeoutScheduler = store => next => action => {
-  console.log('Scheduler', action, '-- ', action.meta)
+  //console.log('Scheduler', action, '-- ', action.meta)
 
   if (!action.meta || !action.meta.delay) {
     return next(action)
@@ -38,7 +38,7 @@ const store = createStore(reducer,
     timeoutScheduler)
 )
 
-console.log('No ny?', store.getState())
+//console.log('No ny?', store.getState())
 
 
 export default store
