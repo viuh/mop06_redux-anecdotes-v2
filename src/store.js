@@ -4,10 +4,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 //import { Provider } from 'react-redux'
 import notificationReducer from './reducers/notificationReducer'
 import anecdoteReducer from './reducers/anecdoteReducer'
+import filterReducer from './reducers/filterReducer'
+
 
 const reducer = combineReducers({
   notifications: notificationReducer,
-  anecdotes: anecdoteReducer
+  anecdotes: anecdoteReducer,
+  filter: filterReducer
 })
 
 /**
@@ -34,8 +37,7 @@ const timeoutScheduler = store => next => action => {
 }
 
 const store = createStore(reducer,
-  applyMiddleware(
-    timeoutScheduler)
+  applyMiddleware(timeoutScheduler)
 )
 
 //console.log('No ny?', store.getState())
