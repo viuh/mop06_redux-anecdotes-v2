@@ -10,16 +10,28 @@ class App extends React.Component {
     //const anecdotes = this.props.store.getState().anecdotes
     //console.log('Lähtödata:', anecdotes)
     //console.log('Noties:',this.props.store.getState().notifications)
+    //<Notification store={this.props.store} />
     return (
       <div>
         <h1>Programming anecdotes</h1>
-        <Notification store={this.props.store} />
-        <Filter store={this.props.store} />
-        <AnecdoteList store={this.props.store} />
-        <AnecdoteForm store={this.props.store} />
+
+        <Notification/>
+        <Filter />
+        <AnecdoteList />
+        <AnecdoteForm />
       </div>
     )
   }
 }
 
+
+
+
 export default App
+
+
+/*        <Notification store={this.props.store}/>
+        <Filter store={this.props.store} />
+        <AnecdoteList store={this.props.store} />
+        <AnecdoteForm store={this.props.store} />
+*/

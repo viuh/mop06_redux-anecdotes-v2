@@ -1,16 +1,20 @@
 import React from 'react'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
-
+import { connect } from 'react-redux'
 
 
 
 class AnecdoteList extends React.Component {
+
   render() {
-    const anecdotes = this.props.store.getState().anecdotes
+
+    const { anecdotes, filter } = this.props
+    let mifilter = filter.filter
+    //const anecdotes = this.props.store.getState().anecdotes
     const sorted = anecdotes.sort((a, b) => b.votes - a.votes)
     //console.log('tila:', this.props.store)
 
-    let mifilter = this.props.store.getState().filter.filter
+    //let mifilter = this.props.store.getState().filter.filter
     let filtered=null
     if (mifilter !== null) {
       filtered = sorted.filter( function (anecdote) {
@@ -32,7 +36,7 @@ class AnecdoteList extends React.Component {
             <div>
               has {anecdote.votes}
               <button onClick={() =>
-                this.props.store.dispatch(voteAnecdote(anecdote.id, anecdote.content))
+                this.props.voteAnecdote(anecdote.id,anecdote.content)
               }>
                 vote
               </button>
@@ -44,7 +48,24 @@ class AnecdoteList extends React.Component {
   }
 }
 
-export default AnecdoteList
 
+const mapStateToProps = (state) => {
+  return {
+    anecdotes: state.anecdotes,
+    filter: state.filter
+  }
+}
+
+const mapDispatchToProps = {
+  voteAnecdote
+}
+
+const conAnecdoteList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AnecdoteList)
+
+//export default AnecdoteList
+export default conAnecdoteList
 
 // { type: 'VOTE', id: anecdote.id }
