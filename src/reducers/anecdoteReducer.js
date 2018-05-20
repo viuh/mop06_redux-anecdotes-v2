@@ -1,35 +1,31 @@
 
-
 import { showNewCreation, showNotification } from './notificationReducer'
-
-
-/*const anecdotesAtStart = [
-  'If it hurts, do it more often',
-  'Adding manpower to a late software project makes it later!',
-  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-  'Premature optimization is the root of all evil.',
-  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-]*/
+import anecdoteService from '../services/anecdotes'
 
 const getId = () => (100000*Math.random()).toFixed(0)
 
-/*const asObject = (anecdote) => {
-  return {
-    content: anecdote,
-    id: getId(),
-    votes: 0
-  }
-}*/
 
 export const createNewAnecdote = (content) => {
-  //console.log('Dui?', content)
+  console.log('Dui?', content)
+  let newObj = {
+    id: getId(),
+    content: content,
+    votes: 0
+  }
+
+  return newObj
+}
+
+export const anecdoteCreation = (content,id) => {
   return {
     type: 'CREATE',
-    id: getId(),
-    name: content
+    content:content,
+    id: id,
+    votes: 0,
   }
 }
+
+
 
 export const voteAnecdote = (id,name) => {
   return {
@@ -60,13 +56,13 @@ const reducer = (store = [], action) => {
 
   }
   if (action.type === 'CREATE') {
-    let nimi2 =action.name 
-    //console.log('YYY ', action, '--', action.id, ':nimi:', nimi2)
-    //console.log('YYY2', action.name)
+    let nimi2 =action.content
+    console.log('YYY ', action, '--', action.id, ':nimi:', nimi2)
+    console.log('YYY2', action.content)
     //createNewAnecdote(nimi2)
     showNewCreation(nimi2)
 
-    return [...store, { content: action.name, id: getId(), votes:0 }]
+    return [...store, { content: action.content, id: getId(), votes:0 }]
   }
 
   if (action.type === 'INIT_ANECDOTES') {

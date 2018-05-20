@@ -21,20 +21,23 @@ const reducer = combineReducers({
  * From: https://redux.js.org/advanced/middleware
  */
 const timeoutScheduler = store => next => action => {
-  //console.log('Scheduler', action, '-- ', action.meta)
 
-  if (!action.meta || !action.meta.delay) {
-    return next(action)
-  }
+  if (action !== undefined) {
+    console.log('Storessa: ', action, '-- ', action.meta)
 
-  const timeoutId = setTimeout(
-    () => next(action),
-    action.meta.delay,
-    action.text = ''
-  )
+    if (!action.meta || !action.meta.delay) {
+      return next(action)
+    }
 
-  return function cancel() {
-    clearTimeout(timeoutId)
+    const timeoutId = setTimeout(
+      () => next(action),
+      action.meta.delay,
+      action.text = ''
+    )
+
+    return function cancel() {
+      clearTimeout(timeoutId)
+    }
   }
 }
 

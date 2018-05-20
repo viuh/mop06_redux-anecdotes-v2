@@ -23,7 +23,7 @@ class AnecdoteList extends React.Component {
     else {
       filtered = sorted
     }
-    //console.log('Sortattu:', filtered)
+    console.log('Sortattu:', filtered)
 
     return (
       <div>
