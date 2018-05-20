@@ -9,8 +9,11 @@ class AnecdoteForm extends React.Component {
     const content = e.target.anecdote.value
     //this.props.store.dispatch(createNewAnecdote(content))
     //this.props.store.dispatch(showNewCreation(content))
+    
+    if (content.length >0) { //to avoid adding empty stuff
     this.props.createNewAnecdote(content)
     this.props.showNewCreation(content)
+    }
     e.target.anecdote.value = ''
   }
 

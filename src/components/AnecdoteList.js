@@ -1,7 +1,7 @@
 import React from 'react'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { connect } from 'react-redux'
-
+import Filter from './Filter'
 
 
 class AnecdoteList extends React.Component {
@@ -12,7 +12,6 @@ class AnecdoteList extends React.Component {
     let mifilter = filter.filter
     //const anecdotes = this.props.store.getState().anecdotes
     const sorted = anecdotes.sort((a, b) => b.votes - a.votes)
-    //console.log('tila:', this.props.store)
 
     //let mifilter = this.props.store.getState().filter.filter
     let filtered=null
@@ -28,6 +27,8 @@ class AnecdoteList extends React.Component {
     return (
       <div>
         <h2>Anecdotes</h2>
+        <Filter />
+
         {filtered.map(anecdote =>
           <div key={anecdote.id}>
             <div>
