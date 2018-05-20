@@ -13,6 +13,7 @@ class AnecdoteList extends React.Component {
     //const anecdotes = this.props.store.getState().anecdotes
     const sorted = anecdotes.sort((a, b) => b.votes - a.votes)
 
+    //console.log('Sorted: ', sorted)
     //let mifilter = this.props.store.getState().filter.filter
     let filtered=null
     if (mifilter !== null) {
