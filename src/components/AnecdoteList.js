@@ -2,9 +2,20 @@ import React from 'react'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { connect } from 'react-redux'
 import Filter from './Filter'
+import anecdoteService from '../services/anecdotes'
 
 
 class AnecdoteList extends React.Component {
+
+  handleVoting = (anecdote) => {
+
+    this.props.voteAnecdote(anecdote.id,anecdote.content)
+
+    anecdote.votes=anecdote.votes+1
+    //console.log('Korjattu otsy: ', anecdote)
+    anecdoteService.update(anecdote.id, anecdote)
+    
+  } 
 
   render() {
 
@@ -37,8 +48,7 @@ class AnecdoteList extends React.Component {
             </div>
             <div>
               has {anecdote.votes}
-              <button onClick={() =>
-                this.props.voteAnecdote(anecdote.id,anecdote.content)
+              <button onClick={() => this.handleVoting (anecdote)
               }>
                 vote
               </button>

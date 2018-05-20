@@ -50,6 +50,7 @@ const reducer = (store = [], action) => {
     const old = store.filter(a => a.id !==action.id)
     const voted = store.find(a => a.id === action.id)
 
+    console.log('Actioni:', action)
     showNotification(action.name)
 
     return [...old, { ...voted, votes: voted.votes+1 } ]
