@@ -25,11 +25,7 @@ class AnecdoteForm extends React.Component {
     if (content.length >0) { //to avoid adding empty stuff
   
       let newObj = createNewAnecdote(content)
-      //let uus = anecdoteService.createNew(newObj)
-      //console.log('Uus otsy:', newObj)
-      //console.log('lista nY: ', this.props.anecdotes)
       this.props.anecdoteCreation(newObj.content, newObj.id)
-      
       //console.log('lista jalkeen: ', this.props.anecdotes)
 
     }

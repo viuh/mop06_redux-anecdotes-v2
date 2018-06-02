@@ -21,6 +21,27 @@ export const showNotification = (atext) => {
   return newstate
 }
 
+export const notify = (text,duration) => {
+
+  //console.log('imprv. notify',text)
+  // duration in seconds=>changeto ms
+  let durinms = duration * 1000
+
+  let newstate = { text: ' ' }
+
+  if (text !== undefined ) {
+    newstate = {
+      meta: { delay: durinms },
+      type: 'SHOWNEW',
+      text: 'New anecdote created: '+ text
+    }
+  } 
+
+  //let store = newstate
+  return newstate
+}
+
+
 export const showNewCreation = (text) => {
 
   //console.log('uusi kehiin?',text)
@@ -58,6 +79,7 @@ const reducer = (store = initialState, action) => {
 
   if (action.type === 'SHOWNEW' || action.type === 'CREATE') {
     let ek =  showNewCreation(action.content)
+      
     removeNotification()
     return ek
   }
@@ -65,6 +87,7 @@ const reducer = (store = initialState, action) => {
   if (action.type === 'SHOWVOTE' || action.type === 'VOTE') {
 
     let ek2 = showNotification(action.name)
+      
     store = ek2
   }
 

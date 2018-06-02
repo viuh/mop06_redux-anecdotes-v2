@@ -5,6 +5,7 @@ import AnecdoteList from './components/AnecdoteList'
 
 import { connect } from 'react-redux'
 import { initializeAnecdotes } from './reducers/anecdoteReducer'
+//import { notify } from './reducers/notificationReducer'
 
 
 class App extends React.Component {
@@ -12,6 +13,7 @@ class App extends React.Component {
   componentDidMount () {
     //console.log('HERE?')
     this.props.initializeAnecdotes()
+
   }
 
   render() {

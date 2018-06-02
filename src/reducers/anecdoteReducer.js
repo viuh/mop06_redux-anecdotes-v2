@@ -1,5 +1,5 @@
 
-import { showNewCreation, showNotification } from './notificationReducer'
+import { notify } from './notificationReducer'
 import anecdoteService from '../services/anecdotes'
 //import thunk from 'redux-thunk'
 const getId = () => (100000*Math.random()).toFixed(0)
@@ -33,13 +33,13 @@ export const voteAnecdote = (id,name) => {
   }
 }
 
-export const anecdoteInitialization = (data) => {
+/*export const anecdoteInitialization = (data) => {
   console.log('Dui: anecdoteInit')
   return {
     type: 'INIT_ANECDOTES',
     data
   }
-}
+}*/
 
 export const initializeAnecdotes = () => {
  
@@ -75,22 +75,25 @@ const reducer = (state = [], action) => {
     const old = state.filter(a => a.id !==action.id)
     const voted = state.find(a => a.id === action.id)
 
-    showNotification(action.name)
-
+    //showNotification(action.name)
+    notify(action.name,5)
     return [...old, { ...voted, votes: voted.votes+1 } ]
 
   }
   if (action.type === 'CREATE') {
     let nimi2 =action.content
     let uus = createNewAnecdote(action)
-    showNewCreation(nimi2)
+
+    notify(nimi2, 5)
+    //showNewCreation(nimi2)
 
     //return [...state, { content: action.content, id: getId(), votes:0 }]
     return [...state, uus]
   }
 
   if (action.type === 'INIT_ANECDOTES') {
-    showNotification('initializations done.')
+    notify('Initializations done.', 3)
+    //showNotification('initializations done.')
     return action.data
   }
 
