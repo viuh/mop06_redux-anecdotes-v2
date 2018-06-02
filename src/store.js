@@ -1,12 +1,13 @@
 
 //import reducer from './reducers/anecdoteReducer'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-//import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+
 import notificationReducer from './reducers/notificationReducer'
-import anecdoteReducer, { anecdoteInitialization } from './reducers/anecdoteReducer'
+import anecdoteReducer from './reducers/anecdoteReducer'
 import filterReducer from './reducers/filterReducer'
 
-import anecdoteService from './services/anecdotes'
+//import anecdoteService from './services/anecdotes'
 
 
 const reducer = combineReducers({
@@ -23,7 +24,7 @@ const reducer = combineReducers({
 const timeoutScheduler = store => next => action => {
 
   if (action !== undefined) {
-    console.log('Storessa: ', action, '-- ', action.meta)
+    //console.log('Storessa: ', action, '-- ', action.meta)
 
     if (!action.meta || !action.meta.delay) {
       return next(action)
@@ -42,14 +43,7 @@ const timeoutScheduler = store => next => action => {
 }
 
 const store = createStore(reducer,
-  applyMiddleware(timeoutScheduler)
-)
-
-anecdoteService.getAll().then(data =>
-  store.dispatch(anecdoteInitialization(data))
-/*  anecdotes => anecdotes.forEach(anecdote => {
-    store.dispatch({ type: 'CREATE', name: anecdote.content })
-  })*/
+  applyMiddleware(thunk, timeoutScheduler)
 )
 
 

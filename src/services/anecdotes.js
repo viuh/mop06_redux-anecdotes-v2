@@ -5,16 +5,13 @@ const baseUrl = 'http://localhost:3001/anecdotes'
 
 const getAll = async () => {
   const response = await axios.get(baseUrl)
-  
-  console.log('resp',response.data)
-  
+  //console.log('SERVICE: data!',response.data)  
   return response.data
-
-  
 }
 
 
 const createNew = async (newObj) => {
+  //console.log('Uutta talteen?',newObj,'<<')
   const response = await axios.post(baseUrl, newObj)
   return response.data
 }

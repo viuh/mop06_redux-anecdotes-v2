@@ -3,7 +3,16 @@ import Notification from './components/Notification'
 import AnecdoteForm from './components/AnecdoteForm'
 import AnecdoteList from './components/AnecdoteList'
 
+import { connect } from 'react-redux'
+import { initializeAnecdotes } from './reducers/anecdoteReducer'
+
+
 class App extends React.Component {
+
+  componentDidMount () {
+    //console.log('HERE?')
+    this.props.initializeAnecdotes()
+  }
 
   render() {
     //const anecdotes = this.props.store.getState().anecdotes
@@ -23,9 +32,10 @@ class App extends React.Component {
 }
 
 
-
-
-export default App
+//export default App
+export default connect(
+  null, { initializeAnecdotes }
+)(App)
 
 
 /*        <Notification store={this.props.store}/>

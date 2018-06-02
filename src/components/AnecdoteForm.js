@@ -6,25 +6,31 @@ import anecdoteService from '../services/anecdotes'
 
 class AnecdoteForm extends React.Component {
 
+  addAnecdote = async(e) => {
+    e.preventDefault()
+    const contenti = e.target.anecdote.value
+    e.target.anecdote.value = ''
+    const arvot= anecdoteCreation(contenti)
+
+    const newAn = await anecdoteService.createNew(arvot)
+    this.props.createNewAnecdote(newAn)
+    //createNewAnecdote(content)
+  }
+
+
   handleSubmit = (e) => {
     e.preventDefault()
     const content = e.target.anecdote.value
-    //this.props.store.dispatch(createNewAnecdote(content))
-    //this.props.store.dispatch(showNewCreation(content))
-    let res = ''
+    //let res = ''
     if (content.length >0) { //to avoid adding empty stuff
   
-  //    res = this.props.createNewAnecdote(content)
-  //    this.props.showNewCreation(content + res)
       let newObj = createNewAnecdote(content)
-      let uus = anecdoteService.createNew(newObj)
-      console.log('Uus otsy:', newObj)
-      //anecdoteCreation(uus.name,uus.id )
-      console.log('lista nY: ', this.props.anecdotes)
-      //this.props.anecdotes.concat(uus)
+      //let uus = anecdoteService.createNew(newObj)
+      //console.log('Uus otsy:', newObj)
+      //console.log('lista nY: ', this.props.anecdotes)
       this.props.anecdoteCreation(newObj.content, newObj.id)
       
-      console.log('lista jalkeen: ', this.props.anecdotes)
+      //console.log('lista jalkeen: ', this.props.anecdotes)
 
     }
     e.target.anecdote.value = ''
@@ -34,7 +40,7 @@ class AnecdoteForm extends React.Component {
      return (
        <div>
       <h2>create new</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.addAnecdote}>
           <div><input name='anecdote'/></div>
           <button>create</button> 
         </form>
@@ -65,3 +71,7 @@ const conAnecdoteForm = connect(
 export default conAnecdoteForm
 
 //export default AnecdoteForm
+/*export default connect(
+  null,
+  {  }
+)(AnecdoteForm)*/

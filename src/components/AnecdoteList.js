@@ -1,6 +1,7 @@
 import React from 'react'
-import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { connect } from 'react-redux'
+
+import { voteAnecdote, initializeAnecdotes } from '../reducers/anecdoteReducer'
 import Filter from './Filter'
 import anecdoteService from '../services/anecdotes'
 
@@ -21,7 +22,7 @@ class AnecdoteList extends React.Component {
 
     const { anecdotes, filter } = this.props
     let mifilter = filter.filter
-    //const anecdotes = this.props.store.getState().anecdotes
+    //let anecdotes2 = anecdotes //this.props.store.getState().anecdotes
     const sorted = anecdotes.sort((a, b) => b.votes - a.votes)
 
     //console.log('Sorted: ', sorted)
@@ -34,7 +35,7 @@ class AnecdoteList extends React.Component {
     else {
       filtered = sorted
     }
-    console.log('Sortattu:', filtered)
+    //console.log('Sortattu:', filtered)
 
     return (
       <div>
@@ -69,7 +70,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  voteAnecdote
+  voteAnecdote,
+  initializeAnecdotes
 }
 
 const conAnecdoteList = connect(

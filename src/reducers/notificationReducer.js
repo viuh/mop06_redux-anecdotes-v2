@@ -5,19 +5,6 @@ const notificationsAtStart = {
   text: 'states initialized'
 }
 
-/*const notificationReducer = (state='', action) => {
-
-  //console.log('NoRe:', action)
-
-  switch (action.type) {
-  case 'SHOWVOTE':
-    return { text: 'You voted' + action.text , meta: { delay:5000 } }
-  case 'SHOWNEW' :
-    return { text: 'Created new: '+action.text, meta: { delay:5000 } }
-  default:
-    return state
-  }
-}*/
 
 export const showNotification = (atext) => {
 
@@ -67,7 +54,7 @@ const initialState = notificationsAtStart
 
 const reducer = (store = initialState, action) => {
 
-  //console.log('NotifRed nyt:', store , ' actioni:' , action.text, '-- a---', action.type)
+  //console.log('NotifRed nyt:', store , ' actioni:' , action.text, '-- a---', action.type, '->', action)
 
   if (action.type === 'SHOWNEW' || action.type === 'CREATE') {
     let ek =  showNewCreation(action.content)
@@ -78,9 +65,8 @@ const reducer = (store = initialState, action) => {
   if (action.type === 'SHOWVOTE' || action.type === 'VOTE') {
 
     let ek2 = showNotification(action.name)
-    store = ek2 
+    store = ek2
   }
-
 
 
   return store
