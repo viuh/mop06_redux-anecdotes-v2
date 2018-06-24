@@ -7,10 +7,11 @@ const getId = () => (100000*Math.random()).toFixed(0)
 
 export const createNewAnecdote = (content) => {
   const res = async (dispatch) => {
-    await anecdoteService.createNew(content) //todo: postaus ei toimi.
+    await anecdoteService.createNew(content) 
     dispatch(content)
   }
-  console.log('cNA', res)
+
+  console.log('createNewAnecdote:', res)
   return content
 }
 
@@ -33,14 +34,6 @@ export const voteAnecdote = (id,name) => {
   }
 }
 
-/*export const anecdoteInitialization = (data) => {
-  console.log('Dui: anecdoteInit')
-  return {
-    type: 'INIT_ANECDOTES',
-    data
-  }
-}*/
-
 export const initializeAnecdotes = () => {
  
   //console.log('InitializAnecdotes 111')
@@ -54,21 +47,6 @@ export const initializeAnecdotes = () => {
   }
   return res
 }
-
-/*export const createNewAn = (content) => {
-  return async (dispatch) => {
-    const newAnecdote = await anecdoteService.createNew(content)
-    //console.log('uudehdo: ? ', newAnecdote)
-    dispatch({
-      type: 'CREATE',
-      data: newAnecdote,
-      votes: 0
-    })
-  }
-}*/
-
-
-//const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = [], action) => {
   if (action.type==='VOTE') {
